@@ -1,27 +1,36 @@
 [gd_scene format=3 uid="uid://cp606m0pi6otd"]
 
 [ext_resource type="MeshLibrary" uid="uid://b66j80a7cfisw" path="res://tiles.tres" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dkhcocvg4f7gw" path="res://scripts/camera_follow.gd" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b2uj8k5m2imk0" path="res://scenes/ball.tscn" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://cnqd3p5lcpm3r" path="res://scripts/ball.gd" id="3_lnu2h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lbhrr"]
+friction = 0.3
 
 [node name="Game" type="Node3D" unique_id=559845273]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1441207935]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, -0.048393488, -2.3492875, 0)
 shadow_enabled = true
 
 [node name="GridMap" type="GridMap" parent="." unique_id=1894731975]
 mesh_library = ExtResource("1_uwrxv")
-cell_size = Vector3(1, 1, 1)
+cell_size = Vector3(0.5, 0.5, 0.5)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(65535, 0, 28, 65535, 65535, 30, 65535, 65534, 25, 65535, 65533, 655463, 0, 65533, 1048591)
+"cells": PackedInt32Array(1, 65530, 1048589, 65535, 65530, 655373, 65535, 65532, 655411, 65535, 65534, 655411, 65535, 0, 655411, 65535, 2, 655411, 1, 65532, 51, 1, 65534, 51, 1, 0, 51, 1, 2, 51, 0, 2, 49, 65533, 3, 1441819)
 }
+metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=821508670]
-transform = Transform3D(1, 0, 0, 0, 0.7463002, 0.6656095, 0, -0.6656095, 0.7463002, 0.36942148, 2.9928155, 2.9002535)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=821508670 node_paths=PackedStringArray("ball")]
+transform = Transform3D(-0.9995783, -0.015286369, -0.024687964, -0.02682491, 0.81163406, 0.58355004, 0.0111172255, 0.58396626, -0.8117019, 0.24504116, 0.9930959, -3.7406914)
 fov = 35.0
+script = ExtResource("2_lbhrr")
+ball = NodePath("../Ball")
+offset = Vector3(0, 2, -3)
 
 [node name="Ball" parent="." unique_id=636869964 instance=ExtResource("2_yqjtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61079276, 0.31427297, -2.5863433)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.24443924, 0.31427297, -2.5863433)
+physics_material_override = SubResource("PhysicsMaterial_lbhrr")
 script = ExtResource("3_lnu2h")
